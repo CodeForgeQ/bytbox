@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BytBox OS v1.0.1</title>
+    
+    <!-- Подключаем локальный пиксельный шрифт -->
+    <style>
+        @font-face {
+            font-family: 'PressStart2P';
+            src: url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+    
+    <!-- Основные стили (CRT, неон, окна) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Главный контейнер терминала -->
+    <div id="terminal">
+        <!-- Внутренности наполним динамически через terminal.js -->
+    </div>
+
+    <!-- Сюда будут добавляться окна "ОС" и рабочий стол -->
+    <div id="desktop-windows"></div>
+
+    <!-- Подключаем звуковой движок Howler.js (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    
+    <!-- Наши скрипты в порядке зависимостей -->
+    <script src="utils.js"></script>
+    <script src="commands.js"></script>
+    <script src="terminal.js"></script>
+    <script src="os.js"></script>
+    <script src="apps.js"></script>
+</body>
+</html>

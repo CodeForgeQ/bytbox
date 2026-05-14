@@ -1,0 +1,221 @@
+/* ===== CSS CUSTOM PROPERTIES (THEME) ===== */
+:root {
+  --text-color: #00ff41;
+  --bg-color: #0a0a0a;
+  --cow-color: #00ff41;
+  --progress-color: #00ff41;
+}
+
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-color);
+  font-family: 'PressStart2P', 'Courier New', monospace;
+  color: var(--text-color);
+  cursor: none;
+  user-select: none;
+}
+
+/* ===== CRT / SCANLINES OVERLAY ===== */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ===== TERMINAL CONTAINER ===== */
+#terminal {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  background: transparent;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  font-size: 14px;
+  position: relative;            /* для абсолютного позиционирования help-бара */
+}
+
+#terminal .output {
+  margin-bottom: 10px;
+}
+
+#terminal .input-line {
+  display: flex;
+  align-items: center;
+}
+
+#terminal .prompt {
+  color: var(--text-color);
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+#terminal #command-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  caret-color: var(--text-color);
+}
+
+#terminal #command-input:focus {
+  outline: none;
+}
+
+/* ===== DESKTOP WINDOWS ===== */
+#desktop-windows {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.window {
+  position: absolute;
+  min-width: 300px;
+  min-height: 200px;
+  background: #1a1a1a;
+  border: 2px solid var(--text-color);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3), inset 0 0 10px rgba(0, 255, 65, 0.05);
+  pointer-events: auto;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  resize: both;
+  overflow: auto;
+}
+
+.window-header {
+  background: #111;
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 12px;
+  cursor: move;
+}
+
+.window-header .close-btn {
+  background: none;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  padding: 2px 8px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.window-header .close-btn:hover {
+  background: #ff0040;
+  color: #000;
+  border-color: #ff0040;
+}
+
+.window-content {
+  flex: 1;
+  padding: 10px;
+  background: #0a0a0a;
+  overflow: auto;
+  cursor: default;
+}
+
+/* ===== CURSOR INSIDE WINDOWS ===== */
+.window button,
+.window .clickable,
+.window input,
+.window textarea,
+.window canvas {
+  cursor: pointer;
+}
+
+.window input[type="text"],
+.window textarea {
+  cursor: text;
+}
+
+/* ===== BUTTONS ===== */
+.window button {
+  background: #111;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  padding: 5px 12px;
+  font-family: inherit;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+}
+
+.window button:hover {
+  background: var(--text-color);
+  color: #000;
+  box-shadow: 0 0 10px var(--text-color);
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: #111;
+  border: 1px solid var(--text-color);
+  margin: 10px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--progress-color);
+  box-shadow: 0 0 10px var(--progress-color);
+}
+
+/* ===== UTILITIES ===== */
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+}
